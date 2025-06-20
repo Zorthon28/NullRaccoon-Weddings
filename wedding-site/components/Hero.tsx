@@ -17,6 +17,7 @@ import WeatherCard from "@/components/WeatherCard";
 import { MapPin, Car, Clipboard, Calendar } from "lucide-react";
 import WeddingGallery from "./WeddingGallery";
 import GiftRegistry from "./GiftRegistry";
+import { toast } from "sonner";
 
 // Define your specific ease function once
 const customEaseOut = cubicBezier(0.42, 0, 0.58, 1);
@@ -295,7 +296,7 @@ export default function Hero({
                   exit={{ opacity: 0, y: -10 }}
                   className="text-sm text-green-600 dark:text-green-400 mt-1 select-none"
                 >
-                  ¡Dirección copiada! ✨
+                  ¡Dirección copiada! Abriendo Uber... 🚗
                 </motion.p>
               )}
             </AnimatePresence>
@@ -313,15 +314,23 @@ export default function Hero({
                 Abrir en Google Maps
               </a>
 
-              <a
-                href={`https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=${venueLatitude}&dropoff[longitude]=${venueLongitude}&dropoff[nickname]=Nuestra%20Boda`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(destinationAddress);
+                  toast.success("Dirección copiada ✨ Abriremos Uber...", {
+                    duration: 3000,
+                  });
+
+                  setTimeout(() => {
+                    const uberURL = `https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=${venueLatitude}&dropoff[longitude]=${venueLongitude}&dropoff[nickname]=Nuestra%20Boda`;
+                    window.open(uberURL, "_blank");
+                  }, 2500);
+                }}
                 className="inline-flex items-center justify-center gap-2 px-5 py-2 border border-pink-500 rounded-full text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900 transition w-full sm:w-auto font-medium"
               >
                 <Car className="w-5 h-5" />
                 Solicitar un Uber
-              </a>
+              </button>
             </div>
           </motion.div>
           <WeddingGallery />
