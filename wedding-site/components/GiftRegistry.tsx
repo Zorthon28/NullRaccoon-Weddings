@@ -3,7 +3,6 @@
 import { motion, cubicBezier } from "framer-motion";
 import Image from "next/image";
 import { clsx } from "clsx";
-import { DollarSign } from "lucide-react"; // Only DollarSign is used now
 
 // Define a custom cubic-bezier ease-out for smoother animations
 const customEaseOut = cubicBezier(0.42, 0, 0.58, 1);
@@ -42,18 +41,20 @@ export default function GiftRegistry() {
       </p>
 
       <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-md">
+        {/* Amazon Button - using baby-blue styling */}
         <a
           href="https://www.amazon.com/your-registry-link" // REMEMBER: Replace with your actual Amazon registry link
           target="_blank"
           rel="noopener noreferrer"
           className={clsx(
             "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full transition transform duration-300 ease-in-out w-full sm:w-auto font-medium whitespace-nowrap",
+            // Baby-blue styling
             "border border-baby-blue-500 text-baby-blue-600 hover:bg-baby-blue-100 hover:scale-105 hover:shadow-lg",
             "dark:border-baby-blue-300 dark:text-baby-blue-300 dark:hover:bg-baby-blue-900 dark:hover:scale-105 dark:hover:shadow-lg"
           )}
         >
           <Image
-            src="/images/icons/amazon.jpg"
+            src="/images/icons/amazon.jpg" // Make sure this path is correct
             alt="Amazon Logo"
             width={20}
             height={20}
@@ -62,19 +63,29 @@ export default function GiftRegistry() {
           Lista de Amazon
         </a>
 
-        {/* Option for monetary contribution */}
+        {/* Costco Registry Button - NOW using the SAME baby-blue styling */}
         <a
-          href="https://your-payment-link.com" // REMEMBER: Replace with your actual payment link (e.g., Zelle, PayPal, bank transfer info)
+          href="YOUR_COSTCO_REGISTRY_LINK_HERE" // IMPORTANT: Replace with your actual Costco registry link
           target="_blank"
           rel="noopener noreferrer"
           className={clsx(
             "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full transition transform duration-300 ease-in-out w-full sm:w-auto font-medium whitespace-nowrap",
-            "border border-olive-500 text-olive-600 hover:bg-olive-200 hover:scale-105 hover:shadow-lg",
-            "dark:border-olive-300 dark:text-olive-300 dark:hover:bg-olive-900 dark:hover:scale-105 dark:hover:shadow-lg"
+            // Applied the SAME baby-blue styling as Amazon
+            "border border-baby-blue-500 text-baby-blue-600 hover:bg-baby-blue-100 hover:scale-105 hover:shadow-lg",
+            "dark:border-baby-blue-300 dark:text-baby-blue-300 dark:hover:bg-baby-blue-900 dark:hover:scale-105 dark:hover:shadow-lg"
           )}
         >
-          <DollarSign className="w-5 h-5" />
-          Contribución Monetaria
+          <Image
+            src="/images/icons/costco.jpg" // Make sure this path and file exist
+            alt="Costco Logo"
+            width={20}
+            height={20}
+            // If your Costco logo has specific colors, remove `dark:invert`.
+            // If it's a simple black/white icon, `dark:invert` will work for dark mode.
+            // Adjust based on your actual icon.
+            // className="dark:invert"
+          />
+          Lista de Costco
         </a>
       </div>
 
