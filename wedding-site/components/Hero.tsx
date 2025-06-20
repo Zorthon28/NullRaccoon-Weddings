@@ -36,16 +36,6 @@ const contentContainerVariants = {
   },
 };
 
-// Subtitle (message) fade-out variant
-const subtitleVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 0.85,
-    y: 0,
-    transition: { delay: 0.5, duration: 1.2, ease: customEaseOut },
-  },
-};
-
 type HeroProps = {
   coupleNames?: [string, string];
   eventDate: Date;
@@ -266,7 +256,7 @@ export default function Hero({
             </h2>
             <p className="mb-4 text-sm sm:text-base font-serif text-olive-700 dark:text-beige-200">
               Para ayudarte a prepararte, aquí tienes el pronóstico del tiempo.
-              ¡Esperamos un día perfecto!
+              ¡Esperamos un día lleno de amor!
             </p>
             <WeatherCard eventDate={eventDate} />
           </motion.div>
