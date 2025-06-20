@@ -10,12 +10,11 @@ import {
 import { useEffect, useState } from "react";
 import Countdown from "./Countdown";
 import MusicToggle from "./MusicToggle";
-import ThemeToggle from "./ThemeToggle";
 import PetalRain from "./PetalRain";
 import Image from "next/image";
 import { clsx } from "clsx";
 import WeatherCard from "@/components/WeatherCard";
-import { MapPin, Car, Clipboard } from "lucide-react";
+import { MapPin, Car, Clipboard, Calendar } from "lucide-react";
 import WeddingGallery from "./WeddingGallery";
 import GiftRegistry from "./GiftRegistry";
 
@@ -54,7 +53,7 @@ type HeroProps = {
 };
 
 export default function Hero({
-  coupleNames = ["Kenia","Gustavo"],
+  coupleNames = ["Kenia", "Gustavo"],
   eventDate,
   message,
 }: HeroProps) {
@@ -110,6 +109,34 @@ export default function Hero({
     },
   };
 
+  const generateGoogleCalendarUrl = () => {
+    const title = "Boda de Kenia & Gustavo";
+    const location = destinationAddress;
+    const details = "¡Acompáñanos en nuestro gran día!";
+
+    // Format date to Google Calendar format: YYYYMMDDTHHmmssZ
+    const start = new Date(eventDate);
+    const end = new Date(eventDate);
+    end.setHours(end.getHours() + 4); // Optional: 4-hour event
+
+    const format = (date: Date) =>
+      date.toISOString().replace(/[-:]|\.\d{3}/g, "");
+
+    const startTime = format(start);
+    const endTime = format(end);
+
+    const baseUrl = "https://www.google.com/calendar/render";
+    const params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: title,
+      dates: `${startTime}/${endTime}`,
+      details,
+      location,
+    });
+
+    return `${baseUrl}?${params.toString()}`;
+  };
+
   return (
     <div
       className="relative min-h-screen overflow-x-hidden
@@ -129,7 +156,6 @@ export default function Hero({
       {/* Toggles (Music & Theme) - Fixed position, always visible */}
       <div className="fixed top-4 right-4 flex gap-3 sm:gap-4 z-50">
         <MusicToggle />
-        <ThemeToggle />
       </div>
 
       {/* Petal animation (if on wedding day) */}
@@ -212,7 +238,18 @@ export default function Hero({
               "flex flex-col items-center justify-center"
             )}
           >
-            <Countdown targetDate={eventDate} />
+            <>
+              <Countdown targetDate={eventDate} />
+              <a
+                href={generateGoogleCalendarUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center gap-2 px-5 py-2 border border-green-600 rounded-full text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900 transition font-medium"
+              >
+                <Calendar className="w-5 h-5" />
+                Agregar a Google Calendar
+              </a>
+            </>
           </motion.div>
 
           {/* Weather Card */}
