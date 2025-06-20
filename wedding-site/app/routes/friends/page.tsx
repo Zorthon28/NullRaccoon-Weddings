@@ -3,9 +3,11 @@ import Hero from '@/components/Hero'
 
 export default function FriendsPage() {
   return (
-    <Hero
-      eventDate={new Date('2025-07-12')}
-      message="Nos vemos el 12 de Julio, 2025 💌 ¡Gracias por celebrar con nosotros, amigos!"
-    />
-  )
-}
+      <Hero
+        coupleNames={["Kenia", "Gustavo"]}
+        eventDate={new Date("2025-07-04T00:00:00")} // ← Updated here
+        message="¡Nos casamos el 4 de julio de 2025! 🎉"
+      />
+    );
+  }
+  
