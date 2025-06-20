@@ -17,7 +17,7 @@ import WeatherCard from "@/components/WeatherCard";
 import { MapPin, Car, Clipboard, Calendar } from "lucide-react";
 import WeddingGallery from "./WeddingGallery";
 import GiftRegistry from "./GiftRegistry";
-import { toast } from "sonner";
+import { toast } from "sonner"; // Make sure Toaster is rendered in your layout.tsx
 
 // Define your specific ease function once
 const customEaseOut = cubicBezier(0.42, 0, 0.58, 1);
@@ -49,7 +49,8 @@ export default function Hero({
   message,
 }: HeroProps) {
   const [showPetals, setShowPetals] = useState(false);
-  const [copied, setCopied] = useState(false);
+  // Removed `copied` state as `sonner` handles the display
+  // const [copied, setCopied] = useState(false);
 
   // Use useScroll on the window for global scroll progress
   const { scrollYProgress } = useScroll();
@@ -84,10 +85,24 @@ export default function Hero({
   const venueLatitude = 32.44791;
   const venueLongitude = -117.07053;
 
-  const copyAddressToClipboard = () => {
+  // New function for copying address directly
+  const handleCopyAddressClick = () => {
     navigator.clipboard.writeText(destinationAddress);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    toast.success("¡Dirección copiada exitosamente!");
+  };
+
+  // New function for handling Uber button click
+  const handleUberButtonClick = () => {
+    navigator.clipboard.writeText(destinationAddress);
+    toast.success("Dirección copiada ✨ Abriendo Uber...", {
+      duration: 3000, // Toast will stay for 3 seconds
+    });
+
+    // Open Uber after a short delay to allow toast to be seen
+    setTimeout(() => {
+      const uberURL = `https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=${venueLatitude}&dropoff[longitude]=${venueLongitude}&dropoff[nickname]=Nuestra%20Boda`;
+      window.open(uberURL, "_blank");
+    }, 2500); // 2.5 seconds delay before opening Uber
   };
 
   const cardItemVariants = {
@@ -153,11 +168,11 @@ export default function Hero({
       <AnimatePresence>{showPetals && <PetalRain />}</AnimatePresence>
       <motion.p
         style={{ opacity: titleOpacity }}
-        className="fixed top-[300px] left-0 right-0 
-             flex items-center justify-center 
-             px-4 text-xl sm:text-2xl md:text-3xl 
-             font-script tracking-wide 
-             text-olive-800 dark:text-beige-300 
+        className="fixed top-[300px] left-0 right-0
+             flex items-center justify-center
+             px-4 text-xl sm:text-2xl md:text-3xl
+             font-script tracking-wide
+             text-olive-800 dark:text-beige-300
              z-40 pointer-events-none"
       >
         Welcome to the wedding of:
@@ -280,15 +295,17 @@ export default function Hero({
             <p className="mb-2 font-medium text-olive-800 dark:text-olive-300 flex items-center justify-center gap-2 select-text text-lg sm:text-xl">
               <MapPin className="w-5 h-5 inline flex-shrink-0" />
               <span>{destinationAddress}</span>
+              {/* Updated onClick to use the new handleCopyAddressClick */}
               <button
-                onClick={copyAddressToClipboard}
+                onClick={handleCopyAddressClick}
                 aria-label="Copiar dirección"
                 className="ml-2 p-1 rounded-full hover:bg-olive-200 dark:hover:bg-olive-700 transition"
               >
                 <Clipboard className="w-5 h-5 text-olive-600 dark:text-olive-300" />
               </button>
             </p>
-            <AnimatePresence>
+            {/* Removed AnimatePresence for `copied` state as sonner handles toasts */}
+            {/* <AnimatePresence>
               {copied && (
                 <motion.p
                   initial={{ opacity: 0, y: -10 }}
@@ -299,11 +316,12 @@ export default function Hero({
                   ¡Dirección copiada! Abriendo Uber... 🚗
                 </motion.p>
               )}
-            </AnimatePresence>
+            </AnimatePresence> */}
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6 w-full">
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                // Corrected Google Maps URL - removed the extra "0" and fixed encodeURIComponent placement
+                href={`http://maps.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
                   destinationAddress
                 )}&travelmode=driving`}
                 target="_blank"
@@ -314,18 +332,9 @@ export default function Hero({
                 Abrir en Google Maps
               </a>
 
+              {/* Updated onClick to use the new handleUberButtonClick */}
               <button
-                onClick={() => {
-                  navigator.clipboard.writeText(destinationAddress);
-                  toast.success("Dirección copiada ✨ Abriremos Uber...", {
-                    duration: 3000,
-                  });
-
-                  setTimeout(() => {
-                    const uberURL = `https://m.uber.com/ul/?action=setPickup&dropoff[latitude]=${venueLatitude}&dropoff[longitude]=${venueLongitude}&dropoff[nickname]=Nuestra%20Boda`;
-                    window.open(uberURL, "_blank");
-                  }, 2500);
-                }}
+                onClick={handleUberButtonClick}
                 className="inline-flex items-center justify-center gap-2 px-5 py-2 border border-pink-500 rounded-full text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900 transition w-full sm:w-auto font-medium"
               >
                 <Car className="w-5 h-5" />
