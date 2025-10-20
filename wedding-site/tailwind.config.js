@@ -31,6 +31,7 @@ module.exports = {
         script: ["Dancing Script", "cursive"],
         sans: ["Inter", "sans-serif"], // Example sans-serif
         dancing: ["var(--font-dancing)", "cursive"],
+        mongre: ['Mongre', 'serif'],
       },
       keyframes: {
         // ... your tw-animate-css keyframes if custom ones are defined

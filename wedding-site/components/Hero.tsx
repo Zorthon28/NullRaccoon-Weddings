@@ -170,11 +170,11 @@ export default function Hero({
   return (
     <div
       className="relative min-h-screen overflow-x-hidden
-                    bg-beige-100 dark:bg-soft-black text-olive-900 dark:text-beige transition-colors duration-700"
+                    bg-white text-olive-900 dark:text-beige transition-colors duration-700"
     >
       {/* Background Image - Covers the entire viewport */}
       <Image
-        src="/images/wedding-hero-bg.jpg"
+        src="/images/wedding-hero-g.jpg"
         alt="Elegant wedding background"
         fill
         priority
@@ -192,12 +192,12 @@ export default function Hero({
       <AnimatePresence>{showPetals && <PetalRain />}</AnimatePresence>
       <motion.p
         style={{ opacity: titleOpacity }}
-        className="fixed top-[300px] left-0 right-0
-                   flex items-center justify-center
-                   px-4 text-xl sm:text-2xl md:text-3xl
-                   font-script tracking-wide
-                   text-olive-800 dark:text-beige-300
-                   z-40 pointer-events-none"
+        className="fixed top-[260px] left-0 right-0
+             flex items-center justify-center
+             px-6 text-3xl sm:text-4xl md:text-5xl
+             font-script tracking-wide
+             text-olive-800 dark:text-beige-300
+             z-40 pointer-events-none"
       >
         Welcome to the wedding of:
       </motion.p>
@@ -250,11 +250,7 @@ export default function Hero({
       {/* Main Scrollable Content Section */}
       <section
         aria-label="Wedding Details"
-        className="relative z-10
-                    min-h-[200vh]
-                    pt-[90vh] // Keep this to push content down
-                    flex flex-col items-center w-full max-w-4xl mx-auto px-4 sm:px-6 py-16
-                    "
+        className="relative z-10 min-h-[200vh] pt-[90vh] flex flex-col items-center w-full max-w-4xl mx-auto px-4 sm:px-6 py-16 font-mongre"
       >
         {/* Background that darkens on scroll */}
         <motion.div
@@ -278,9 +274,10 @@ export default function Hero({
             variants={cardItemVariants}
             className={clsx(
               "w-full p-6 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-lg",
-              "bg-beige/85 dark:bg-soft-black/85 border border-white/25 dark:border-soft-black/40",
+              "bg-#919f8e dark:bg-soft-black/85 border border-white/25 dark:border-soft-black/40",
               "flex flex-col items-center justify-center"
             )}
+            style={{ backgroundColor: "#919f8e" }}
           >
             <>
               <Countdown targetDate={eventDate} />
@@ -288,7 +285,7 @@ export default function Hero({
                 href={generateGoogleCalendarUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center justify-center gap-2 px-5 py-2 border border-green-600 rounded-full text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900 transition font-medium"
+                className="mt-4 inline-flex items-center justify-center gap-2 px-5 py-2 border border-green-600 rounded-full text-white dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900 transition font-medium"
               >
                 <Calendar className="w-5 h-5" />
                 Agregar a Google Calendar
@@ -308,7 +305,7 @@ export default function Hero({
             <h2 className="mb-4 text-xl sm:text-2xl font-script text-olive-800 dark:text-olive-300">
               Clima para el Gran Día
             </h2>
-            <p className="mb-4 text-sm sm:text-base font-serif text-olive-700 dark:text-beige-200">
+            <p className="mb-4 text-sm sm:text-base text-olive-700 dark:text-beige-200 font-mongre">
               Para ayudarte a prepararte, aquí tienes el pronóstico del tiempo.
               ¡Esperamos un día lleno de amor!
             </p>
@@ -336,7 +333,7 @@ export default function Hero({
               <button
                 onClick={handleCopyAddressClick}
                 aria-label="Copiar dirección"
-                className="ml-2 p-1 rounded-full hover:bg-olive-200 dark:hover:bg-olive-700 transition"
+                className="ml-2 p-1 rounded-full hover:bg-olive-200 dark:hover:bg-olive-700 transition font-mongre"
               >
                 <Clipboard className="w-5 h-5 text-olive-600 dark:text-olive-300" />
               </button>
@@ -357,7 +354,8 @@ export default function Hero({
 
               <button
                 onClick={handleUberButtonClick}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2 border border-pink-500 rounded-full text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900 transition w-full sm:w-auto font-medium"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2 border border-pink-500 rounded-full
+              text-pink-600 dark:text-pink-300 hover:bg-pink-100 dark:hover:bg-pink-900 transition w-full sm:w-auto font-medium font-mongre"
               >
                 <Car className="w-5 h-5" />
                 Solicitar un Uber

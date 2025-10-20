@@ -19,7 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" suppressHydrationWarning className={dancing.variable}>
-      <body className={`${inter.className} bg-white text-black dark:bg-neutral-900 dark:text-white`}>
+      <body className={`${inter.className} font-mongre bg-white text-black dark:bg-neutral-900 dark:text-white`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Toaster position="top-right" richColors />
           {children}

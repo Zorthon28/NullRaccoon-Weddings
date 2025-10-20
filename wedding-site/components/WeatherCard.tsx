@@ -141,20 +141,26 @@ export default function WeatherCard({ eventDate }: Props) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      {/* Date */}
-      <div className="flex items-center justify-center gap-2 text-olive-900 dark:text-beige-100 text-xl font-serif">
-        <CalendarDays className="w-5 h-5 stroke-olive-600 dark:stroke-beige-200" />
-        <span>{`Pronóstico para el ${formatDate(forecast.date)}`}</span>
-      </div>
+      <div className="text-center space-y-4 text-olive-900 dark:text-beige-200 text-sm font-serif">
+        {/* Date */}
+        <div className="flex items-center justify-center gap-2 text-base sm:text-lg font-semibold">
+          <CalendarDays className="w-5 h-5 stroke-olive-600 dark:stroke-beige-200" />
+          <span className="font-mongre">
+            Pronóstico para el {formatDate(forecast.date)}
+          </span>
+        </div>
 
-      {/* Icon & Description */}
-      <div className="flex items-center justify-center gap-2 text-base text-olive-800 dark:text-beige-300">
-        <span title={`Código: ${forecast.weatherCode}`}>
-          {getIconForWeatherCode(forecast.weatherCode)}
-        </span>
-        <span>{getLabelForWeatherCode(forecast.weatherCode)}</span>
+        {/* Icon & Description */}
+        <div className="flex items-center justify-center gap-2 text-sm sm:text-base">
+          <span title={`Código: ${forecast.weatherCode}`}>
+            {getIconForWeatherCode(forecast.weatherCode)}
+          </span>
+          <span>{getLabelForWeatherCode(forecast.weatherCode)}</span>
+        </div>
+
+        {/* Precipitación (si aplica) */}
         {forecast.precipitation > 0 && (
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-base text-olive-800 dark:text-beige-300">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm sm:text-base text-olive-800 dark:text-beige-300">
             {getIconForWeatherCode(forecast.weatherCode)}
 
             <span className="font-medium">
@@ -169,18 +175,18 @@ export default function WeatherCard({ eventDate }: Props) {
             </span>
           </div>
         )}
-      </div>
 
-      {/* Temperature Range */}
-      <div className="flex items-center justify-center gap-4 text-2xl font-semibold text-rose-700 dark:text-pink-300">
-        <div className="flex items-center gap-1">
-          <ThermometerSnowflake className="w-5 h-5 stroke-blue-500" />
-          <span>{forecast.tempMin.toFixed(1)}°C</span>
-        </div>
-        <span className="text-gray-400 dark:text-gray-600">–</span>
-        <div className="flex items-center gap-1">
-          <ThermometerSun className="w-5 h-5 stroke-orange-500" />
-          <span>{forecast.tempMax.toFixed(1)}°C</span>
+        {/* Temperature Range */}
+        <div className="flex items-center justify-center gap-4 text-base font-semibold">
+          <div className="flex items-center gap-1">
+            <ThermometerSnowflake className="w-5 h-5 stroke-blue-500" />
+            <span>{forecast.tempMin.toFixed(1)}°C</span>
+          </div>
+          <span className="text-gray-400 dark:text-gray-600">–</span>
+          <div className="flex items-center gap-1">
+            <ThermometerSun className="w-5 h-5 stroke-orange-500" />
+            <span>{forecast.tempMax.toFixed(1)}°C</span>
+          </div>
         </div>
       </div>
     </motion.div>

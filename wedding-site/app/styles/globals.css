@@ -26,6 +26,15 @@
   }
 }
 
+@font-face {
+  font-family: 'Mongre';
+  src: url('/fonts/SouthBlanke-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 html, body {
   margin: 0;
   padding: 0;

@@ -52,7 +52,7 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
 
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-xl sm:text-2xl font-script text-olive-800 dark:text-olive-300 mb-4">
+      <h2 className="text-xl sm:text-2xl font-script text-white dark:text-olive-300 mb-4">
         ¡La cuenta regresiva ha comenzado!
       </h2>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
